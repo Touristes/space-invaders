@@ -29,6 +29,9 @@ struct key getKey(struct key key) {
 	    case SDLK_UP:
 	      key.up = 1;
 	      break;
+            case SDLK_RETURN:
+	      key.enter = 1;
+	      break;
 	    case SDLK_ESCAPE:
 	    key.exit = 1;
 	    break;
@@ -54,6 +57,9 @@ struct key getKey(struct key key) {
 	    case SDLK_UP:
 	      key.up = 0;
 	      break;
+            case SDLK_RETURN:
+              key.enter = 0;
+              break;
             case SDLK_ESCAPE:
               key.exit = 0;
               break;
