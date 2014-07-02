@@ -5,11 +5,14 @@
 ## Login   <grogne_f@etna-alternance.net>
 ## 
 ## Started on  Wed Jul  2 09:47:56 2014 GROGNET Florent
-## Last update Wed Jul  2 11:03:39 2014 GROGNET Florent
+## Last update Wed Jul  2 15:16:51 2014 GROGNET Florent
 ##
 CC	=	gcc
 NAME	=	do-op
-SRC	=	./src/main.c
+SRC	=	./src/main.c \
+		./src/struct.c \
+		./src/keyMap.c \
+		./src/draw.c
 OBJS	=	$(SRC:.c=.o)
 EXEC	= 	space_invaders
 CFLAGS	= 	-W -Wall -Werror
