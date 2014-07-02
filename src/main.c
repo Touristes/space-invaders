@@ -41,6 +41,14 @@ int main(int argc , char ** argv)
 	    selectedMenu++;
 	  else if (key.up == 1 && selectedMenu > 1)
 	    selectedMenu--;
+	  else if (key.enter == 1) {
+	    if (selectedMenu == 1)
+	      menu = 0;
+	    else if (selectedMenu == 2)
+	      menu = 1; //doing nothing yet
+	    else if (selectedMenu == 3)
+	      menu = 1; //doing nothing yet
+	  }
 	  pRenderer = drawMenu(pRenderer, selectedMenu);
 	}
 	else
