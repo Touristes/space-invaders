@@ -54,7 +54,7 @@ SDL_Renderer* drawMenu(SDL_Renderer* pRenderer, int selectedMenu, TTF_Font* font
     SDL_SetRenderDrawColor(pRenderer, 80, 80, 150, 255);
   r.y = 350;
   SDL_RenderFillRect(pRenderer, &r);
-  pSurface = TTF_RenderText_Solid(font,"          Exit           ",color);
+  pSurface = TTF_RenderText_Solid(font,"             Exit              ",color);
   pTexture = SDL_CreateTextureFromSurface(pRenderer, pSurface);
   SDL_RenderCopy(pRenderer, pTexture, NULL, &r);
   SDL_RenderPresent(pRenderer);

@@ -24,7 +24,7 @@ int main(int argc , char ** argv)
   SDL_Window* pWindow = NULL;
   SDL_Renderer* pRenderer = NULL;
   SDL_Surface* pSurface = NULL;
-  TTF_Font* font = TTF_OpenFont("/Library/Fonts/Microsoft/Arial.ttf", 25);
+  TTF_Font* font = TTF_OpenFont("/Library/Fonts/Microsoft/Arial.ttf", 72);
   pWindow = SDL_CreateWindow("Space Invaders",SDL_WINDOWPOS_UNDEFINED,
 			     SDL_WINDOWPOS_UNDEFINED,
 			     640,
