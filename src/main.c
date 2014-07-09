@@ -1,7 +1,7 @@
 #include "../SDL2/SDL.h"
 #include "../SDL2/SDL_TTF.h"
 #include <stdio.h>
-#include "libSI.h"
+#include "../include/libSI.h"
 #include "struct.c"
 
 int main(int argc , char ** argv)
@@ -52,12 +52,14 @@ int main(int argc , char ** argv)
 	    else if (selectedMenu == 2)
 	      menu = 1; //doing nothing yet
 	    else if (selectedMenu == 3)
-	      menu = 1; //doing nothing yet
+	      menu = 2;
             else if (selectedMenu == 4)
               loop = 0;
 	  }
 	  pRenderer = drawMenu(pRenderer, selectedMenu, font, pSurface);
 	}
+	else if (menu == 2)
+	  pRenderer = drawHighScores(pRenderer, font, pSurface);
 	else
 	  pRenderer = drawGame(pRenderer);
 	SDL_Delay(100);

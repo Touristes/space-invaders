@@ -4,4 +4,5 @@
 
 SDL_Renderer* drawGame(SDL_Renderer* pRenderer);
 SDL_Renderer* drawMenu(SDL_Renderer* pRenderer, int selectedMenu,TTF_Font* font, SDL_Surface* pSurface);
+SDL_Renderer* drawHighScores(SDL_Renderer* pRenderer, TTF_Font* font, SDL_Surface* pSurface);
 struct key getKey(struct key key);
