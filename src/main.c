@@ -58,8 +58,12 @@ int main(int argc , char ** argv)
 	  }
 	  pRenderer = drawMenu(pRenderer, selectedMenu, font, pSurface);
 	}
-	else if (menu == 2)
-	  pRenderer = drawHighScores(pRenderer, font, pSurface);
+	else if (menu == 2) {
+	  if (key.enter == 1)
+	    menu = 1;
+	  else
+	    pRenderer = drawHighScores(pRenderer, font, pSurface);
+	}
 	else
 	  pRenderer = drawGame(pRenderer);
 	SDL_Delay(100);

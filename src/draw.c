@@ -79,19 +79,23 @@ SDL_Renderer* drawHighScores(SDL_Renderer* pRenderer, TTF_Font* font, SDL_Surfac
   SDL_Color color={255,255,255,255};
   for (int i = 0; i < 4 && r.y < 430 ; i++) {
     SDL_RenderFillRect(pRenderer, &r);
-    SDL_SetRenderDrawColor(pRenderer, 180, 180, 250, 255);
     pSurface = TTF_RenderText_Solid(font,Scores[i],color);
     pTexture = SDL_CreateTextureFromSurface(pRenderer, pSurface);
     SDL_RenderCopy(pRenderer, pTexture, NULL, &r);
     r.y += 60;
     i++;
     SDL_RenderFillRect(pRenderer, &r2);
-    SDL_SetRenderDrawColor(pRenderer, 180, 180, 250, 255);
     pSurface = TTF_RenderText_Solid(font,Scores[i],color);
     pTexture = SDL_CreateTextureFromSurface(pRenderer, pSurface);
     SDL_RenderCopy(pRenderer, pTexture, NULL, &r2);
     r2.y += 60;
   }
+  SDL_SetRenderDrawColor(pRenderer, 80, 80, 80, 255);
+  SDL_Rect r3 = {50,430,540,40};
+  SDL_RenderFillRect(pRenderer, &r3);
+  pSurface = TTF_RenderText_Solid(font,"Press enter to return to the main menu",color);
+  pTexture = SDL_CreateTextureFromSurface(pRenderer, pSurface);
+  SDL_RenderCopy(pRenderer, pTexture, NULL, &r3);
   SDL_RenderPresent(pRenderer);
   return (pRenderer);
 }
