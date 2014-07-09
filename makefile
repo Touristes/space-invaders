@@ -5,7 +5,7 @@
 ## Login   <grogne_f@etna-alternance.net>
 ## 
 ## Started on  Wed Jul  2 09:47:56 2014 GROGNET Florent
-## Last update Wed Jul  2 15:16:51 2014 GROGNET Florent
+## Last update Wed Jul  9 09:49:51 2014 GROGNET Florent
 ##
 CC	=	gcc
 NAME	=	do-op
@@ -16,7 +16,7 @@ SRC	=	./src/main.c \
 OBJS	=	$(SRC:.c=.o)
 EXEC	= 	space_invaders
 CFLAGS	= 	-W -Wall -Werror
-LDFLAGS =	-L./SDL2 -I/Library/Frameworks/SDL2.framework/Headers -framework SDL2 -framework Cocoa
+LDFLAGS =	-L./SDL2 -I/Library/Frameworks/SDL2.framework/Headers -framework SDL2 -framework SDL2_ttf -framework Cocoa
 RM	=	rm -f
 ST_NAME =	./lib/libspace_invaders.a
 DY_NAME =	./lib/libspace_invaders.so
