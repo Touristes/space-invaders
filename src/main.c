@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "../include/libSI.h"
 #include "struct.c"
-
+int     writeScore(char *name, int points);
 int main(int argc , char ** argv)
 {
   char a;
@@ -12,6 +12,7 @@ int main(int argc , char ** argv)
   int menu;
   int selectedMenu;
   /* Initialisation simple */
+
   if (argc == 1)
     a = argv[0][0];
   if (SDL_Init(SDL_INIT_VIDEO) != 0 )
@@ -19,6 +20,7 @@ int main(int argc , char ** argv)
       fprintf(stdout,"Échec de l'initialisation de la SDL (%s)\n",SDL_GetError());
       return -1;
     }
+  //writeScore("Flo 2", 92);
   TTF_Init();
   /* Création de la fenêtre */
   SDL_Window* pWindow = NULL;
