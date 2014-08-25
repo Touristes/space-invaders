@@ -14,8 +14,8 @@ int	main()
     environ.window = SDL_CreateWindow("Space Invaders",
 					    				SDL_WINDOWPOS_UNDEFINED,
 								    	SDL_WINDOWPOS_UNDEFINED,
-								     	HEIGHT,
 								     	WIDTH,
+                      HEIGHT,
 								     	SDL_WINDOW_SHOWN);
 
     environ.renderer = SDL_CreateRenderer(environ.window, -1, SDL_RENDERER_PRESENTVSYNC);
