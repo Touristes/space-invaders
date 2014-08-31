@@ -21,5 +21,8 @@ texture_t	*Core_FindTextureByName(obj_t *obj, char *name);
 texture_t	*Core_FindTextureById(obj_t *obj, int id);
 void	Core_FreeTextureList(texture_t *list);
 void	Core_FreeList(obj_t *list);
+stat_t	*Core_CreateStat(int hp, float speed, int firerate, void (*ia)(obj_t *, game_t *));
+obj_t	*Core_CloneObj(obj_t *obj);
+
 
 #endif

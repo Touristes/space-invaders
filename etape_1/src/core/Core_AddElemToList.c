@@ -6,6 +6,7 @@ obj_t *Core_AddElemToList(obj_t *start, obj_t *new)
 	obj_t *it = start;
 
 	new->next = 0 ;
+
 	if (start != 0){
 		while (it->next != 0)
 		{

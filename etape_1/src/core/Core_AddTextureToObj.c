@@ -4,8 +4,8 @@
 void	Core_AddTextureToObj(int id, char *name, obj_t *obj, char *file, SDL_Renderer *renderer)
 {
 	texture_t *new;
-	printf("%s\n", file);
-	new = xmalloc(sizeof(*new));
+/*	printf("%s\n", file);
+*/	new = xmalloc(sizeof(*new));
 	
 	SDL_Surface *sprite = SDL_LoadBMP(file);
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, sprite);

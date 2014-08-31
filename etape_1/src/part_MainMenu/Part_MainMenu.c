@@ -9,6 +9,5 @@ int	Part_MainMenu(env_t *environ)
 	texture = Core_GetWindowCopy(environ);
 	save = Part_MainMenu_Init(environ);
 	Core_SetWindowCopy(environ, texture);
-
 	return (save);
 }
