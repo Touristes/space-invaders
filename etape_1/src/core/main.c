@@ -4,7 +4,7 @@
 int	main()
 {
 	env_t	environ;
-
+  srand(time(0));
 	if (SDL_Init(SDL_INIT_VIDEO) != 0 )
     {
       fprintf(stdout,"Échec de l'initialisation de la SDL (%s)\n",SDL_GetError());

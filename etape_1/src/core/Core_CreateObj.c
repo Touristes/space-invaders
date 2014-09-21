@@ -14,6 +14,6 @@ obj_t	*Core_CreateObj(int id, char *name, SDL_Rect *rect)
 	new->id = id;
 	new->name = name;
 	new->rect = rect;
-	
+	new->stat = 0;
 	return (new);
 }

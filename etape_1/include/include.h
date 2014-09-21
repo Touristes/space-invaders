@@ -2,9 +2,14 @@
 #define __INCLUDE__
 
 #include "../../SDL2/SDL.h"
+#include <time.h>
 
 #define HEIGHT 800
 #define WIDTH 640
+#define UP 1
+#define DOWN 2
+#define LEFT 3
+#define RIGHT 4
 
 typedef struct env_s
 {
@@ -68,7 +73,9 @@ typedef struct stat_s
 {
 	int hp;
 	float speed; //pixels/ms
+	int dir; //direction
 	int firerate; //ms between 2 shots
+	int fire_time; //ms last shoot time
 	void (*ia)(obj_t *, game_t *);
 
 }	stat_t;
@@ -93,9 +100,15 @@ int		Part_Game(env_t *environ);
 int		Part_Game_Init(env_t *environ);
 obj_t 	*Part_Game_Init_Model(char *name, char **texture, stat_t *stat, env_t *environ);
 obj_t	*Part_Game_Init_Line(int start_x, int inter_x, int finish_x, int y, obj_t *new_obj, obj_t *model);
+void 	Part_Game_Init_Free(game_t *game);
 void	Part_Game_Ia(obj_t *subject, game_t *game);
-int 	Part_Game_Loop(env_t *environ, game_t game);
-
+void	Part_Game_Ia_Loop(game_t *game);
+void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game);
+int 	Part_Game_Loop(env_t *environ, game_t *game);
+void	Part_Game_Loop_Refresh(env_t *environ, game_t *game);
+void	Part_Game_PlayerAction(input_t *input, game_t *game);
+void 	Part_Game_PlayerMove(int mdir, obj_t *playerList);
+void 	Part_Game_PlayerFire(obj_t *playerList, game_t *game);
 	
 //Part_HS
 int		Part_HS(env_t *environ);

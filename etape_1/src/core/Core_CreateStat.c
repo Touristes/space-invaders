@@ -11,6 +11,8 @@ stat_t	*Core_CreateStat(int hp, float speed, int firerate, void (*ia)(obj_t *, g
 	stat->speed = speed;
 	stat->firerate = firerate;
 	stat->ia = ia;
-	
+	stat->dir = RIGHT;
+	stat->fire_time = SDL_GetTicks();
+
 	return (stat);
 }

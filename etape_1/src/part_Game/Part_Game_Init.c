@@ -55,25 +55,36 @@ int	Part_Game_Init(env_t *environ)
 				 Core_CreateStat(3,0.3,300, &Part_Game_Ia), environ));
 	game.model = Core_AddElemToList(game.model, Part_Game_Init_Model("m_bullet", m_bullet, 
 				 Core_CreateStat(1,0.7,0, &Part_Game_Ia), environ));
+	game.bullet = 0;
 	game.model = Core_AddElemToList(game.model, Part_Game_Init_Model("p_bullet", p_bullet, 
 				 Core_CreateStat(1,0.7,0, &Part_Game_Ia), environ));
 
 
 	game.mob = Part_Game_Init_Line(100, 10, WIDTH -100, 50, 0, Core_FindByName(game.model, "mob_yellow"));
 	game.mob = Part_Game_Init_Line(200, 10, WIDTH - 200, 100, game.mob, Core_FindByName(game.model, "mob_pink"));
-	game.bunker = Part_Game_Init_Line(20, 60, 560, 800 - 40, 0, Core_FindByName(game.model, "bunker"));
-	game.player = Part_Game_Init_Line(320, 0, 321, 800 - 10, 0, Core_FindByName(game.model, "player"));
-
+	game.bunker = Part_Game_Init_Line(20, 60, 560, HEIGHT - 40, 0, Core_FindByName(game.model, "bunker"));
+	game.player = Part_Game_Init_Line(320, 0, 321, HEIGHT - 10, 0, Core_FindByName(game.model, "player"));
+	game.player = Part_Game_Init_Line(320+WIDTH, 0, 321 + WIDTH, HEIGHT - 10, game.player, Core_FindByName(game.model, "player"));
 	SDL_RenderClear(environ->renderer);
 	Core_RenderList(game.mob, environ->renderer);
 	Core_RenderList(game.bunker, environ->renderer);
 	Core_RenderList(game.player, environ->renderer);
 
     SDL_RenderPresent(environ->renderer);
-    Part_Game_Loop(environ, game);
+    Part_Game_Loop(environ, &game);
 
 	// ne pas oublier de free game et les sous listes
+	Part_Game_Init_Free(&game);
     return (0);
+}
+
+void Part_Game_Init_Free(game_t *game)
+{
+	Core_FreeObjList(game->mob);
+	Core_FreeObjList(game->bunker);
+	Core_FreeObjList(game->player);
+	Core_FreeObjList(game->bullet);
+	Core_FreeList(game->model);
 }
 
 obj_t *Part_Game_Init_Model(char *name, char **texture, stat_t *stat, env_t *environ)

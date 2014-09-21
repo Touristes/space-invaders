@@ -23,6 +23,9 @@ void	Core_FreeTextureList(texture_t *list);
 void	Core_FreeList(obj_t *list);
 stat_t	*Core_CreateStat(int hp, float speed, int firerate, void (*ia)(obj_t *, game_t *));
 obj_t	*Core_CloneObj(obj_t *obj);
+void	Core_FreeObjList(obj_t *list);
+obj_t 	*Core_RemoveElemFromList(obj_t *start, obj_t *elem);
+obj_t	*Core_CheckIfObjTouch(obj_t *obj, obj_t *list);
 
 
 #endif

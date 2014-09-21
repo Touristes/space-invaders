@@ -32,15 +32,15 @@ int	Part_MainMenu_Loop(env_t *environ, obj_t *list)
     		}
     		Part_MainMenu_SwitchBtnTexture(list, btnhover, environ->renderer, "down");
  			SDL_Delay(300);
-    		action = 0;
     		for (int i = 0; func_tab[i].flag != 0; i++)
     		{
     			if (func_tab[i].flag == Core_FindById(list, btnhover)->name)
     				func_tab[i].func(environ);
     		}
-    		printf("JE SUIS DEHOOOOOORS :p\n");
+    		action = 0;
+			memset(&input, 0, sizeof(input_t));
     	}
-    	else 
+    	else
     	{
 	    	if (input.key[SDL_SCANCODE_UP] && btnhover > 1)
 	    	{
