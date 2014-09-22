@@ -10,12 +10,17 @@
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
+#define WIN 1
+#define LOOSE 2
+#define TIMESCORE 30000
 
 typedef struct env_s
 {
   SDL_Window *window;
   SDL_Renderer *renderer;
   SDL_Surface *surface;
+  int score;
+  int time;
 
 }	env_t;
 
@@ -103,15 +108,17 @@ obj_t	*Part_Game_Init_Line(int start_x, int inter_x, int finish_x, int y, obj_t 
 void 	Part_Game_Init_Free(game_t *game);
 void	Part_Game_Ia(obj_t *subject, game_t *game);
 void	Part_Game_Ia_Loop(game_t *game);
-void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game);
+void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game, env_t *environ);
 int 	Part_Game_Loop(env_t *environ, game_t *game);
 void	Part_Game_Loop_Refresh(env_t *environ, game_t *game);
 void	Part_Game_PlayerAction(input_t *input, game_t *game);
 void 	Part_Game_PlayerMove(int mdir, obj_t *playerList);
 void 	Part_Game_PlayerFire(obj_t *playerList, game_t *game);
+void 	Part_Game_Loop_End(int end, env_t *environ);
 	
 //Part_HS
 int		Part_HS(env_t *environ);
+int 	Part_HS_Init(env_t *environ);
 
 
 #include "x_func.h"

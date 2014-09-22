@@ -71,6 +71,8 @@ int	Part_Game_Init(env_t *environ)
 	Core_RenderList(game.player, environ->renderer);
 
     SDL_RenderPresent(environ->renderer);
+    environ->time = SDL_GetTicks();
+    environ->score = 0;
     Part_Game_Loop(environ, &game);
 
 	// ne pas oublier de free game et les sous listes

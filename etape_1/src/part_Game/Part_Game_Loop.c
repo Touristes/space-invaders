@@ -16,14 +16,27 @@ int	Part_Game_Loop(env_t *environ, game_t *game)
 
 		Part_Game_PlayerAction(&input, game);
 		Part_Game_Ia_Loop(game);
-		Part_Game_Ia_Bullet(game->bullet, game);
+		Part_Game_Ia_Bullet(game->bullet, game, environ);
 
-	    if (input.key[SDL_SCANCODE_ESCAPE])
+	    if (input.key[SDL_SCANCODE_ESCAPE] ||
+	    	game->mob == 0 ||
+	    	game->player->next == 0)
 	    	{
 	    		loop = 0;
+	    		if (game->mob == 0)
+	    		{
+	    			Part_Game_Loop_End(1, environ);
+	    		}
+	    		else if (game->player->next == 0)
+	    		{
+	    			Part_Game_Loop_End(2, environ);
+	    		}
 	    	}
+	    else
+	    {
 		Part_Game_Loop_Refresh(environ, game);
     	SDL_Delay(30 - (SDL_GetTicks() - stime));
+    	}
     }
 	return (0);
 }
@@ -37,3 +50,28 @@ void Part_Game_Loop_Refresh(env_t *environ, game_t *game)
 	Core_RenderList(game->bunker, environ->renderer);
 	SDL_RenderPresent(environ->renderer);
 }
+
+void Part_Game_Loop_End(int end, env_t *environ)
+{
+	obj_t *new;
+
+	new = Core_CreateObj(6, "end", Core_CreateRect(0, 0, 640, 800));
+	if (end == 1)
+	{
+		Core_AddTextureToObj(1, "win", new, "./img/victory.bmp", environ->renderer);
+		new->active_texture = Core_FindTextureByName(new, "win");
+	}
+	else
+	{
+		Core_AddTextureToObj(1, "loose", new, "./img/game_over.bmp", environ->renderer);
+		new->active_texture = Core_FindTextureByName(new, "loose");		
+	}
+	SDL_RenderClear(environ->renderer);
+	Core_RenderList(new, environ->renderer);
+    SDL_RenderPresent(environ->renderer);
+    printf("%f\n", environ->score);
+    Core_Pause();
+    Part_HS(environ);
+
+}
+

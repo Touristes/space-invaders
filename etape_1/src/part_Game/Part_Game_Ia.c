@@ -62,7 +62,7 @@ void Part_Game_Ia_Loop(game_t *game)
 	}
 }
 
-void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game)
+void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game, env_t *environ)
 {
 	printf("->Part_Game_Ia_Bullet\n");
 	obj_t *checkret;
@@ -77,6 +77,13 @@ void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game)
 			subject->rect->y -= 30 * subject->stat->speed;
 			if ((checkret = Core_CheckIfObjTouch(subject, game->mob)))
 			{
+				printf("%d \n", (int)(SDL_GetTicks() - environ->time));
+				printf("%d \n", (int)(SDL_GetTicks() - environ->time));
+				
+				if ((TIMESCORE - (int)(SDL_GetTicks() - environ->time)) >= 0)
+				{
+					environ->score += (100 * (TIMESCORE - (int)(SDL_GetTicks() - environ->time)))/TIMESCORE;
+				}
 				game->mob = Core_RemoveElemFromList(game->mob, checkret);
 			}
 		}
@@ -85,7 +92,14 @@ void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game)
 			subject->rect->y += 30 * subject->stat->speed;
 			if ((checkret = Core_CheckIfObjTouch(subject, game->player)))
 			{
-				game->player = Core_RemoveElemFromList(game->player, checkret);
+				if (game->player->stat->hp != 0)
+				{
+					game->player->stat->hp -= 1;
+				}
+				else
+				{
+					game->player = Core_RemoveElemFromList(game->player, checkret);					
+				}
 			}
 		}
 		if (checkret == 0)

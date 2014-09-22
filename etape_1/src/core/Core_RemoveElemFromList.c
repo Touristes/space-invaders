@@ -13,7 +13,6 @@ obj_t *Core_RemoveElemFromList(obj_t *start, obj_t *elem)
 	}
 	if (elem->prev == 0)
 	{
-		printf("Q\n" );
 
 		free(elem->rect);
 		tmp = elem->next;
