@@ -3,6 +3,8 @@
 
 #include "../../SDL2/SDL.h"
 #include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define HEIGHT 800
 #define WIDTH 640
@@ -119,7 +121,7 @@ void 	Part_Game_Loop_End(int end, env_t *environ);
 //Part_HS
 int		Part_HS(env_t *environ);
 int 	Part_HS_Init(env_t *environ);
-
+void 	Part_HS_Init_Read(int *hs, int score);
 
 #include "x_func.h"
 

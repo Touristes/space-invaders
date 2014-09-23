@@ -69,7 +69,6 @@ void Part_Game_Loop_End(int end, env_t *environ)
 	SDL_RenderClear(environ->renderer);
 	Core_RenderList(new, environ->renderer);
     SDL_RenderPresent(environ->renderer);
-    printf("%f\n", environ->score);
     Core_Pause();
     Part_HS(environ);
 

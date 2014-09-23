@@ -6,47 +6,82 @@ int	Part_HS_Init(env_t *environ)
 	obj_t *list;
 	input_t input;
 	obj_t *new;
+	int hs[10];
 
-	printf("Part_MainMenu_Init\n");
+printf("In Init\n");
 
-	
 	list = 0;
 	memset(&input, 0, sizeof(input_t));
 	
-	printf("Part_MainMenu_Init : before Core_CreateObj\n");
-	new = Core_CreateObj(1, "start", Core_CreateRect(80, 300, 0, 0));
-
-	printf("Part_MainMenu_Init : after Core_CreateObj\n");
-	Core_AddTextureToObj(1, "button", new, "./img/start_button.bmp", environ->renderer);
-	Core_AddTextureToObj(2, "hover", new, "./img/start_hover.bmp", environ->renderer);
-	Core_AddTextureToObj(3, "down", new, "./img/start_down.bmp", environ->renderer);
-	new->active_texture = Core_FindTextureByName(new, "hover");
+	new = Core_CreateObj(1, "nbr", Core_CreateRect(0, 0, 0, 0));
+	Core_AddTextureToObj(0, "0", new, "./img/0.bmp", environ->renderer);
+	Core_AddTextureToObj(1, "1", new, "./img/1.bmp", environ->renderer);
+	Core_AddTextureToObj(2, "2", new, "./img/2.bmp", environ->renderer);
+	Core_AddTextureToObj(3, "3", new, "./img/3.bmp", environ->renderer);
+	Core_AddTextureToObj(4, "4", new, "./img/4.bmp", environ->renderer);
+	Core_AddTextureToObj(5, "5", new, "./img/5.bmp", environ->renderer);
+	Core_AddTextureToObj(6, "6", new, "./img/6.bmp", environ->renderer);
+	Core_AddTextureToObj(7, "7", new, "./img/7.bmp", environ->renderer);
+	Core_AddTextureToObj(8, "8", new, "./img/8.bmp", environ->renderer);
+	Core_AddTextureToObj(9, "9", new, "./img/9.bmp", environ->renderer);
 	list = Core_AddElemToList(list, new);
 
-	new = Core_CreateObj(2, "opt", Core_CreateRect(80, 430, 0, 0));
-	Core_AddTextureToObj(1, "button", new, "./img/opt_button.bmp", environ->renderer);
-	Core_AddTextureToObj(2, "hover", new, "./img/opt_hover.bmp", environ->renderer);
-	Core_AddTextureToObj(3, "down", new, "./img/opt_down.bmp", environ->renderer);
-	new->active_texture = Core_FindTextureByName(new, "button");
-	list = Core_AddElemToList(list, new);
-
-	new = Core_CreateObj(3, "hs", Core_CreateRect(80, 566, 0, 0));
-	Core_AddTextureToObj(1, "button", new, "./img/hs_button.bmp", environ->renderer);
-	Core_AddTextureToObj(2, "hover", new, "./img/hs_hover.bmp", environ->renderer);
-	Core_AddTextureToObj(3, "down", new, "./img/hs_down.bmp", environ->renderer);
-	new->active_texture = Core_FindTextureByName(new, "button");
-	list = Core_AddElemToList(list, new);
-
-	new = Core_CreateObj(4, "exit", Core_CreateRect(80, 699, 0, 0));
-	Core_AddTextureToObj(1, "button", new, "./img/exit_button.bmp", environ->renderer);
-	Core_AddTextureToObj(2, "hover", new, "./img/exit_hover.bmp", environ->renderer);
-	Core_AddTextureToObj(3, "down", new, "./img/exit_down.bmp", environ->renderer);
-	new->active_texture = Core_FindTextureByName(new, "button");
-	list = Core_AddElemToList(list, new);
-
-	Core_RenderList(list, environ->renderer);
+	Part_HS_Init_Read(hs, environ->score);
+	printf("%d\n", hs[0]);
+/*	Core_RenderList(list, environ->renderer);
     SDL_RenderPresent(environ->renderer);
 
     Part_MainMenu_Loop(environ, list);
+*/  
+exit(0);  
     return (0);
+}
+
+void Part_HS_Init_Read(int *hs, int score)
+{
+	FILE *fd;
+	char *grou;
+	size_t len;
+
+	printf("In read\n");
+	len = 0;
+	if ((fd = fopen("./src/part_HS/HS.txt", "r+")))
+	{
+		printf("avantfor1\n");
+		for (int i = 0; i < 10; i++)
+		{
+			getline(&grou, &len, fd);
+			printf("%s\n", grou);
+			if (atoi(grou) > score)
+			{
+				printf("in atoi de grou\n");
+				hs[i] = atoi(grou);
+			}
+			else
+			{
+				hs[i] = score;
+				if (i != 9)
+				{
+					hs[i++] = atoi(grou);
+				}
+			}
+		}
+		fseek(fd, SEEK_SET, 0);
+		printf("avantfor2\n");
+		for (int i = 0; i < 10; i++)
+		{
+			fprintf(fd, "%d\n", hs[i]);
+		}
+	}
+	else
+	{
+		fd = fopen("./src/part_HS/HS.txt", "w+");
+		hs[0] = score;
+		fprintf(fd, "%d\n", score);
+		for (int i = 1; i < 10; i++)
+		{
+			hs[i] = 0;
+			fprintf(fd, "0\n");
+		}
+	}
 }

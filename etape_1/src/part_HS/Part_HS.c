@@ -8,7 +8,7 @@ int	Part_HS(env_t *environ)
 
 	texture = Core_GetWindowCopy(environ);
 //	save = Part_Opt_Init(environ);
-	environ = 0;
+	Part_HS_Init(environ);
 	Core_SetWindowCopy(environ, texture);
 
 	return (0);
