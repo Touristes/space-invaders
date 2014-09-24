@@ -122,6 +122,7 @@ void 	Part_Game_Loop_End(int end, env_t *environ);
 int		Part_HS(env_t *environ);
 int 	Part_HS_Init(env_t *environ);
 void 	Part_HS_Init_Read(int *hs, int score);
+obj_t 	*Part_HS_Init_Display(env_t *environ, obj_t *models, SDL_Rect *pos, int score);
 
 #include "x_func.h"
 

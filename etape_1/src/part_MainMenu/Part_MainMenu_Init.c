@@ -7,16 +7,10 @@ int	Part_MainMenu_Init(env_t* environ)
 	input_t input;
 	obj_t *new;
 
-	printf("Part_MainMenu_Init\n");
-
-	
 	list = 0;
 	memset(&input, 0, sizeof(input_t));
 	
-	printf("Part_MainMenu_Init : before Core_CreateObj\n");
 	new = Core_CreateObj(1, "start", Core_CreateRect(80, 300, 0, 0));
-
-	printf("Part_MainMenu_Init : after Core_CreateObj\n");
 	Core_AddTextureToObj(1, "button", new, "./img/start_button.bmp", environ->renderer);
 	Core_AddTextureToObj(2, "hover", new, "./img/start_hover.bmp", environ->renderer);
 	Core_AddTextureToObj(3, "down", new, "./img/start_down.bmp", environ->renderer);
@@ -50,21 +44,3 @@ int	Part_MainMenu_Init(env_t* environ)
     Part_MainMenu_Loop(environ, list);
     return (0);
 }
-
-/*obj_t *Part_MainMenu_ListCeption(char *name, int *id, obj_t *list, SDL_Renderer *renderer, int x, int y, char *file)
-{
-	obj_t *new;
-
-	new = Core_RenderBMP(renderer, x, y, file);
-	new->name = name;
-	new->id = id;
-	list = Core_AddElemToList(list, new);
-
-	return (list);
-}*/
-
-/*obj_t *Part_MainMenu_Display(obj_t *list, int btn, int state)
-{
-
-	return (list);
-}*/

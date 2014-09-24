@@ -27,9 +27,11 @@ printf("In Init\n");
 	list = Core_AddElemToList(list, new);
 
 	Part_HS_Init_Read(hs, environ->score);
-	printf("%d\n", hs[0]);
-/*	Core_RenderList(list, environ->renderer);
+	SDL_RenderClear(environ->renderer);
+	Part_HS_Init_Display(environ, list, Core_CreateRect(400, 400,0,0), hs[0]);
     SDL_RenderPresent(environ->renderer);
+	Core_Pause();
+/*	Core_RenderList(list, environ->renderer);
 
     Part_MainMenu_Loop(environ, list);
 */  
@@ -43,31 +45,28 @@ void Part_HS_Init_Read(int *hs, int score)
 	char *grou;
 	size_t len;
 
-	printf("In read\n");
 	len = 0;
 	if ((fd = fopen("./src/part_HS/HS.txt", "r+")))
 	{
-		printf("avantfor1\n");
 		for (int i = 0; i < 10; i++)
 		{
 			getline(&grou, &len, fd);
-			printf("%s\n", grou);
-			if (atoi(grou) > score)
+			if (atoi(grou) > score || score == 0)
 			{
-				printf("in atoi de grou\n");
 				hs[i] = atoi(grou);
 			}
 			else
 			{
 				hs[i] = score;
+				score = 0;
 				if (i != 9)
 				{
-					hs[i++] = atoi(grou);
+					hs[++i] = atoi(grou);
 				}
 			}
 		}
-		fseek(fd, SEEK_SET, 0);
-		printf("avantfor2\n");
+		fclose(fd);
+		fd = fopen("./src/part_HS/HS.txt", "w+");
 		for (int i = 0; i < 10; i++)
 		{
 			fprintf(fd, "%d\n", hs[i]);
@@ -84,4 +83,40 @@ void Part_HS_Init_Read(int *hs, int score)
 			fprintf(fd, "0\n");
 		}
 	}
+	fclose(fd);
 }
+
+
+obj_t *Part_HS_Init_Display(env_t *environ, obj_t *models, SDL_Rect *pos, int score)
+{
+	int digit;
+	obj_t *list;
+	obj_t *new;
+	int i;
+printf("tufyghjn\n");
+	list = 0;
+	i = 0;
+	while (score != 0)
+	{
+		digit = score % 10;
+		score = score/10;
+		
+		new = Core_CloneObj(models);
+		printf("hghjkk\n");
+		new->active_texture = Core_FindTextureById(new, digit);
+printf("jhg\n");
+		new->rect->x = pos->x - (i * new->active_texture->rect->w);
+		new->rect->y = pos->y;
+		list = Core_AddElemToList(list, new);
+		i++;
+	}
+	printf("giuihiu\n");
+	Core_RenderList(list, environ->renderer);
+printf("vgchhj\n");
+	Core_FreeObjList(list);
+
+printf("njnkl\n");	free(pos);
+	return (0);
+}
+
+

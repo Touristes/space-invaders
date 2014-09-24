@@ -64,22 +64,17 @@ void Part_Game_Ia_Loop(game_t *game)
 
 void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game, env_t *environ)
 {
-	printf("->Part_Game_Ia_Bullet\n");
 	obj_t *checkret;
 	obj_t *tmp;
 
 	while (subject != 0)
 	{	
 		checkret = 0;
-		printf("->%p\n", subject);
 		if (subject->stat->dir == UP)
 		{
 			subject->rect->y -= 30 * subject->stat->speed;
 			if ((checkret = Core_CheckIfObjTouch(subject, game->mob)))
 			{
-				printf("%d \n", (int)(SDL_GetTicks() - environ->time));
-				printf("%d \n", (int)(SDL_GetTicks() - environ->time));
-				
 				if ((TIMESCORE - (int)(SDL_GetTicks() - environ->time)) >= 0)
 				{
 					environ->score += (100 * (TIMESCORE - (int)(SDL_GetTicks() - environ->time)))/TIMESCORE;
@@ -115,12 +110,10 @@ void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game, env_t *environ)
 				{
 					if (checkret->stat->hp == 4)
 					{
-						printf("active_texture\n");
 						checkret->active_texture = Core_FindTextureByName(checkret, "mid");
 					}
 					else if (checkret->stat->hp == 2)
 					{
-						printf("active\n");
 						checkret->active_texture = Core_FindTextureByName(checkret, "ko");	
 					}
 				}
@@ -135,5 +128,4 @@ void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game, env_t *environ)
 			game->bullet = Core_RemoveElemFromList(game->bullet, tmp);	
 		}
 	}
-	printf("<-Part_Game_Ia_Bullet\n");
 }

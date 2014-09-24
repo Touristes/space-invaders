@@ -13,9 +13,6 @@ void	Core_Pause()
 	while (test)
 	{
 		SDL_WaitEvent(&event);
-/*		if (event.key.keysym.scancode == SDL_SCANCODE_SPACE)
-		{
-*/			test = 0;
-/*		}
-*/	}
+			test = 0;
+	}
 }

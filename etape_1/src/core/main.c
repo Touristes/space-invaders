@@ -26,6 +26,3 @@ int	main()
     SDL_Quit();
 
 }
-
-//next step : how to capture/save screen for later restablishment
-//then : get any keyboard event

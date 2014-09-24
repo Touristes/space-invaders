@@ -27,7 +27,6 @@ int	Part_Opt_Init(env_t* environ)
     SDL_RenderPresent(environ->renderer);
 
     Part_Opt_Loop(environ, list);
-    printf("PWET PWET LAGALEEEEEEETTE !!!\n");
     Core_FreeList(list);
     return (0);
 }

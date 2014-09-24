@@ -41,8 +41,6 @@ char *p_bullet[] = {
 
 int	Part_Game_Init(env_t *environ)
 {
-	printf("Part_Game_Init \n" );
-
 	game_t game;
 	
 	game.model = Core_AddElemToList(0, Part_Game_Init_Model("mob_pink", mob_pink, 

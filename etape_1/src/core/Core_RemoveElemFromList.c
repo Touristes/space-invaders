@@ -3,10 +3,8 @@
 
 obj_t *Core_RemoveElemFromList(obj_t *start, obj_t *elem)
 {
-	printf("->Core_RemoveElemFromList\n"	);
-	printf("!=%p\n", elem);
-
 	obj_t *tmp;
+
 	if (elem == 0)
 	{
 		return start;
@@ -21,12 +19,10 @@ obj_t *Core_RemoveElemFromList(obj_t *start, obj_t *elem)
 			tmp->prev = 0;
 		free(elem);
 		
-		printf("<-Core_RemoveElemFromList\n");
 		return (tmp);
 	}
 	else
 	{
-		printf("A\n" );
 		elem->prev->next = elem->next;
 		if (elem->next != 0)
 		{
@@ -35,7 +31,6 @@ obj_t *Core_RemoveElemFromList(obj_t *start, obj_t *elem)
 		free(elem->rect);
 		free(elem);
 
-		printf("<-Core_RemoveElemFromList\n");
 		return (start);
 	}
 }

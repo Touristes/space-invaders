@@ -11,8 +11,11 @@ obj_t	*Core_CloneObj(obj_t *obj)
 	objCopy->rect = xmalloc(sizeof(SDL_Rect));
 	objCopy->rect = memcpy(objCopy->rect, obj->rect, sizeof(SDL_Rect));
 
-	objCopy->stat = xmalloc(sizeof(stat_t));
-	objCopy->stat = memcpy(objCopy->stat, obj->stat, sizeof(stat_t));
+	if (objCopy->stat != 0)
+	{
+		objCopy->stat = xmalloc(sizeof(stat_t));
+		objCopy->stat = memcpy(objCopy->stat, obj->stat, sizeof(stat_t));
+	}
 
 	return (objCopy);
 }
