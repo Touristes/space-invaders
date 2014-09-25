@@ -3,15 +3,11 @@
 
 char *mob_pink[] = {
 	"down", "./img/mob_pink.bmp",
-	"right", "./img/mob_pink_right.bmp",
-	"left", "./img/mob_pink_left.bmp",
 	0
 };
 
 char *mob_yellow[] = {
 	"down", "./img/mob_yellow.bmp",
-	"right", "./img/mob_yellow_right.bmp",
-	"left", "./img/mob_yellow_left.bmp",
 	0
 };
 
@@ -24,8 +20,6 @@ char *bunker[] = {
 
 char *player[] = {
 	"up", "./img/spaceship.bmp",
-	"right", "./img/spaceship_right.bmp",
-	"left", "./img/spaceship_left.bmp",
 	0
 };
 
@@ -42,24 +36,30 @@ char *p_bullet[] = {
 int	Part_Game_Init(env_t *environ)
 {
 	game_t game;
-	
+	int nb_line;
+
+	nb_line= (rand()%(6-3))+3;
 	game.model = Core_AddElemToList(0, Part_Game_Init_Model("mob_pink", mob_pink, 
-	 			 Core_CreateStat(1,0.1,300, &Part_Game_Ia), environ));
+	 			 Core_CreateStat(1,0.1,350, &Part_Game_Ia), environ));
 	game.model = Core_AddElemToList(game.model, Part_Game_Init_Model("mob_yellow", mob_yellow, 
-		         Core_CreateStat(1,0.1,300, &Part_Game_Ia), environ));
+		         Core_CreateStat(1,0.1,350, &Part_Game_Ia), environ));
 	game.model = Core_AddElemToList(game.model, Part_Game_Init_Model("bunker", bunker, 
-				 Core_CreateStat(6,0,0, &Part_Game_Ia), environ));
+				 Core_CreateStat(12,0,0, &Part_Game_Ia), environ));
 	game.model = Core_AddElemToList(game.model, Part_Game_Init_Model("player", player, 
-				 Core_CreateStat(3,0.3,300, &Part_Game_Ia), environ));
+				 Core_CreateStat(3,0.3,175, &Part_Game_Ia), environ));
 	game.model = Core_AddElemToList(game.model, Part_Game_Init_Model("m_bullet", m_bullet, 
 				 Core_CreateStat(1,0.7,0, &Part_Game_Ia), environ));
 	game.bullet = 0;
 	game.model = Core_AddElemToList(game.model, Part_Game_Init_Model("p_bullet", p_bullet, 
 				 Core_CreateStat(1,0.7,0, &Part_Game_Ia), environ));
 
+	game.mob = 0;
+	for (int i = 0; i < nb_line; i++)
+	{
+		game.mob = Part_Game_Init_Line((rand()%(200-100))+100, 30 , WIDTH -(rand()%(200-100))+100, ((1+i++)*60), game.mob, Core_FindByName(game.model, "mob_yellow"));
+		game.mob = Part_Game_Init_Line((rand()%(200-100))+100, 30 , WIDTH -(rand()%(200-100))+100, ((1+i)*60), game.mob, Core_FindByName(game.model, "mob_pink"));
+	}
 
-	game.mob = Part_Game_Init_Line(100, 10, WIDTH -100, 50, 0, Core_FindByName(game.model, "mob_yellow"));
-	game.mob = Part_Game_Init_Line(200, 10, WIDTH - 200, 100, game.mob, Core_FindByName(game.model, "mob_pink"));
 	game.bunker = Part_Game_Init_Line(20, 60, 560, HEIGHT - 40, 0, Core_FindByName(game.model, "bunker"));
 	game.player = Part_Game_Init_Line(320, 0, 321, HEIGHT - 10, 0, Core_FindByName(game.model, "player"));
 	game.player = Part_Game_Init_Line(320+WIDTH, 0, 321 + WIDTH, HEIGHT - 10, game.player, Core_FindByName(game.model, "player"));

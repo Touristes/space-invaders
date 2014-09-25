@@ -38,12 +38,12 @@ void	Part_Game_Ia(obj_t *subject, game_t *game)
 		}
 	}
 
-	if (0 == (rand()%(100-0))+0 && (int)(subject->stat->fire_time - SDL_GetTicks()) < subject->stat->firerate)
+	if (0 == (rand()%(100-0))+0 && (int)(SDL_GetTicks() - subject->stat->fire_time ) > subject->stat->firerate)
 	{
 		subject->stat->fire_time = SDL_GetTicks();
 		clone = Core_CloneObj(Core_FindByName(game->model, "m_bullet"));
 		clone->rect->x = subject->rect->x + subject->active_texture->rect->w / 2 - clone->active_texture->rect->w / 2;
-		clone->rect->y = subject->rect->y - subject->active_texture->rect->h;
+		clone->rect->y = subject->rect->y + subject->active_texture->rect->h;
 		clone->stat->dir = DOWN;
 		game->bullet = Core_AddElemToList(game->bullet, clone);
 	}
@@ -108,11 +108,11 @@ void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game, env_t *environ)
 				}
 				else
 				{
-					if (checkret->stat->hp == 4)
+					if (checkret->stat->hp == 8)
 					{
 						checkret->active_texture = Core_FindTextureByName(checkret, "mid");
 					}
-					else if (checkret->stat->hp == 2)
+					else if (checkret->stat->hp == 4)
 					{
 						checkret->active_texture = Core_FindTextureByName(checkret, "ko");	
 					}

@@ -89,6 +89,13 @@ void	Part_MainMenu_SwitchBtnTexture(obj_t *list, int btnhover, SDL_Renderer *ren
 		it = it->next;
 	}
 	SDL_RenderClear(renderer);
+
+	it = Core_CreateObj(0, "main_menu", Core_CreateRect(0, 0, 0, 0));
+	Core_AddTextureToObj(1, "main_menu", it, "./img/main_menu.bmp", renderer);
+	it->active_texture = Core_FindTextureByName(it, "main_menu");
+	Core_RenderList(it, renderer);
 	Core_RenderList(list, renderer);
 	SDL_RenderPresent(renderer);
+	Core_FreeList(it);
+
 }

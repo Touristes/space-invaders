@@ -1,7 +1,7 @@
 #include "../../../SDL2/SDL.h"
 #include "../../include/include.h"
 
-void	Part_Game_PlayerAction(input_t *input, game_t *game)
+void	Part_Game_PlayerAction(input_t *input, game_t *game, env_t *environ)
 {
 	if (input->key[SDL_SCANCODE_A] || input->key[SDL_SCANCODE_LEFT])
 	{
@@ -16,6 +16,10 @@ void	Part_Game_PlayerAction(input_t *input, game_t *game)
 		input->key[SDL_SCANCODE_W] = 0;
 		input->key[SDL_SCANCODE_UP] = 0;
 		Part_Game_PlayerFire(game->player, game);
+		if (environ->score >= 25)
+			environ->score -= 25;
+		else
+			environ->score = 1;
 	}
 
 }
@@ -55,7 +59,7 @@ void Part_Game_PlayerFire(obj_t *playerList, game_t *game)
 		player = it;
 		if (it->rect->x > (0 - it->active_texture->rect->w) &&
 			it->rect->x <= (WIDTH - it->active_texture->rect->w/2) &&
-			(int)(it->stat->fire_time - SDL_GetTicks()) < it->stat->firerate)
+			(int)(SDL_GetTicks() - it->stat->fire_time) > it->stat->firerate)
 		{
 			it->stat->fire_time = SDL_GetTicks();
 			clone = Core_CloneObj(Core_FindByName(game->model, "p_bullet"));

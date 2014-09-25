@@ -6,8 +6,6 @@ int	Part_Game(env_t *environ)
 	int	save;
 	SDL_Texture *texture;
 
-	printf("Part_Game \n" );
-
 	texture = Core_GetWindowCopy(environ);
 	save = Part_Game_Init(environ);
 	Core_SetWindowCopy(environ, texture);

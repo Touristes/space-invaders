@@ -113,7 +113,7 @@ void	Part_Game_Ia_Loop(game_t *game);
 void	Part_Game_Ia_Bullet(obj_t *subject, game_t *game, env_t *environ);
 int 	Part_Game_Loop(env_t *environ, game_t *game);
 void	Part_Game_Loop_Refresh(env_t *environ, game_t *game);
-void	Part_Game_PlayerAction(input_t *input, game_t *game);
+void	Part_Game_PlayerAction(input_t *input, game_t *game, env_t *environ);
 void 	Part_Game_PlayerMove(int mdir, obj_t *playerList);
 void 	Part_Game_PlayerFire(obj_t *playerList, game_t *game);
 void 	Part_Game_Loop_End(int end, env_t *environ);
